@@ -28,8 +28,19 @@ app.get('/test', async (req,res) => {
 
 
 // create a record
-app.post("/jobs", function (req,res) {
-    
+app.post("/jobs", async (req,res) => {	
+	const result = await sql`
+		insert 
+		  into jobs 
+		  (jobtitle,company,region,jobcategory)
+		  values( 
+			${req.body.jobTitle}, 
+			${req.body.company}, 
+			${req.body.region}, 
+			${req.body.jobCategory} )`;
+    console.log(result);
+    let data = {"result": result};
+    res.json(data);       
 });
 
 
@@ -43,20 +54,39 @@ app.get("/jobs", async (req, res) => {
 
 
 // get record by id 
-app.get("/jobs/:id", function (req,res) {
-    
+app.get("/jobs/:id", async (req,res) => {
+	const result = await sql`
+	  select * 
+	    from jobs 
+		where id=${req.params.id}`;
+    console.log(result);
+    let data = {"result": result};
+    res.json(data);      
 });
 
 
 // update a specific record
-app.put("/jobs/:id", function (req,res) {
-    
+app.put("/jobs/:id", async (req,res) => {
+	//console.log(req.body);
+	const result = await sql`
+		update jobs 
+		  set jobtitle    = ${req.body.jobTitle},
+		      company     = ${req.body.company},
+			  region      = ${req.body.region},
+			  jobcategory = ${req.body.jobCategory}
+		  where id=${req.params.id}`;
+    console.log(result);
+    let data = {"result": result};
+    res.json(data);      
 });
 
 
 // delete a specific record
-app.delete("/jobs/:id", function (req,res) {
-  
+app.delete("/jobs/:id", async (req,res) => {
+	const result = await sql`delete from jobs where id=${req.params.id}`;
+    console.log(result);
+    let data = {"result": result};
+    res.json(data);      
 });
 
 

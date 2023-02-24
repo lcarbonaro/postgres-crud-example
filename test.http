@@ -9,6 +9,34 @@ GET http://localhost:3000/jobs
 ###
 
 
+GET http://localhost:3000/jobs/1
+
+###
+
+
+PUT http://localhost:3000/jobs/1
+content-type: application/json
+
+{"jobTitle":"Test Ops","company":"XYZ Ltd","region":"West","jobCategory":"Accounting"}
+
+###
+
+
+POST http://localhost:3000/jobs
+content-type: application/json
+
+{"jobTitle":"Test Ops 2","company":"Roncal Ltd","region":"Cardiff","jobCategory":"IT"}
+
+###
+
+
+DELETE http://localhost:3000/jobs/2
+
+###
+
+
+
+
 
 
 ### from earlier examples
