@@ -18,6 +18,12 @@ const URL = `postgres://${PGUSER}:${PGPASSWORD}@${PGHOST}/${PGDATABASE}?options=
 
 const sql = postgres(URL, { ssl: 'require' });
 
+app.get('/', async (req,res) => {
+    const result = {"hello":"world"};
+    console.log(result);
+    let data = {"result": result};
+    res.json(data);  
+});
 
 app.get('/test', async (req,res) => {
     const result = await sql`select version()`;
